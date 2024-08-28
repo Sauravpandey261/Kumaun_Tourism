@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./sidebar/sidebar.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: poppins;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      .main {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+      body::-webkit-scrollbar {
+        display: none;
+      }
+      .nav {
+        width: 100%;
+        height: 60%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-right: 30px;
+      }
+      .nav .middle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+      }
+      .middle a {
+        text-decoration: none;
+        color: black;
+        font-size: 20px;
+        font-family: "Roboto";
+        text-transform: uppercase;
+      }
+      .logo {
+        width: 200px;
+        height: 100%;
+        border-radius: 0px;
+        overflow: hidden;
+      }
+      .logo img {
+        width: 100%;
+        height: 100%;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        object-fit: cover;
+        object-position: center;
+      }
+      .mainnav {
+        position: fixed;
+        top: 0;
+        z-index: 101;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 100px;
+        background-color: white;
+      }
+
+      .maindropdownmenu {
+        width: 100%;
+        background-color: #e7e7e7bb;
+        height: 40%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+        gap: 35px;
+      }
+      .maindropdownmenu a {
+        text-decoration: none;
+        color: black;
+      }
+
+      .dropdownmenu {
+        position: relative;
+        display: inline-block;
+      }
+
+      .dropdownmenu a {
+        display: block;
+        padding: 8px;
+        text-decoration: none;
+        color: black;
+      }
+
+      .dropdownmenu a:hover {
+        background-color: #ddd;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+      }
+
+      .dropdown-content a {
+        padding: 8px 16px;
+        text-decoration: none;
+        display: block;
+        color: black;
+      }
+
+      .dropdown-content a:hover {
+        background-color: #ddd;
+      }
+
+      .dropdownmenu:hover .dropdown-content {
+        display: block;
+      }
+      .logo a {
+        text-decoration: none;
+        color: black;
+      }
+      .page1 {
+        width: 100%;
+        max-height: fit-content;
+        background-color: rgba(219, 219, 219, 0.479);
+        padding: 90px 0px 0 0px;
+      }
+      .imagecontainer {
+        position: relative;
+        width: 100%;
+        height: 500px;
+      }
+      .imagecontainer img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+      .imagecontainer .overlay1 {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.13);
+      }
+      .overlay1 h1 {
+        position: absolute;
+        bottom: 10%;
+        left: 10%;
+        width: fit-content;
+        padding: 40px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        font-size: 40px;
+        color: rgba(2, 63, 34, 0.671);
+        text-transform: uppercase;
+        box-shadow: 10px 10px 0px black;
+        border-radius: 10px;
+      }
+
+      .page2 {
+        height: fit-content;
+      }
+      .page2 {
+        display: flex;
+        width: 100%;
+        height: fit-content;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .mousecursor {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.677);
+        position: fixed;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        font-size: 5px;
+        text-align: center;
+        transform: translate(-50%, -50%);
+      }
+      .infocontainer {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        padding: 20px;
+      }
+      .infocontainer .about {
+        width: 100%;
+        height: fit-content;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 10px;
+      }
+      .about .aboutimg {
+        width: 30%;
+        height: 100%;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .aboutimg img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 10px;
+      }
+      .about .content {
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+        height: 100%;
+      }
+      .content h2 {
+        font-size: 27px;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        display: inline;
+        width: fit-content;
+        border-bottom: 4px solid rgba(0, 0, 0, 0.836);
+      }
+      .content p {
+        font-size: 18px;
+      }
+      #menuicon {
+        display: none;
+      }
+
+      @media (max-width: 1000px) {
+        .maindropdownmenu {
+          width: 100%;
+          background-color: #ffffffbb;
+          height: 40%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          padding: 20px 30px;
+        }
+        .maindropdownmenu a {
+          text-decoration: none;
+          color: black;
+          font-size: 15px;
+        }
+
+        .overlay1 h1 {
+          padding: 20px;
+          font-size: 30px;
+        }
+        .imagecontainer {
+          height: 400px;
+        }
+      }
+      @media (max-width: 770px) {
+        .nav {
+          padding: 0 20px;
+          background-color: white;
+        }
+        .nav .middle {
+          gap: 40px;
+        }
+        #menuicon {
+          display: block;
+          color: black;
+          font-size: 22px;
+        }
+        .middle a {
+          display: none;
+        }
+        .logo {
+          font-size: 25px;
+          text-transform: uppercase;
+        }
+        .mainnav {
+          position: fixed;
+          top: 0;
+          z-index: 1000;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+          height: 90px;
+        }
+        .maindropdownmenu {
+          width: 100%;
+          background-color: #ffffffbb;
+          height: 40%;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          gap: 10px;
+          padding: 20px 30px;
+        }
+        .maindropdownmenu::-webkit-scrollbar {
+          display: none;
+        }
+        #menuicon {
+          display: block;
+        }
+
+        .maindropdownmenu a {
+          text-decoration: none;
+          color: black;
+        }
+
+        .logo a {
+          text-decoration: none;
+        }
+        .mousecursor {
+          display: none;
+        }
+        .imagecontainer {
+          height: 300px;
+        }
+
+        .infocontainer {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 5vw;
+          padding: 10px;
+        }
+        .infocontainer .about {
+          width: 100%;
+          height: fit-content;
+          background-color: #fff;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+          gap: 3vw;
+          padding: 10px;
+        }
+        .about .aboutimg {
+          width: 90%;
+          height: 30vw;
+          padding: 5px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .aboutimg img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          border-radius: 10px;
+        }
+        .about .content {
+          display: flex;
+          flex-direction: column;
+          width: 90%;
+          height: 100%;
+        }
+        .content h2 {
+          font-size: 4vw;
+          margin-bottom: 2vw;
+          margin-top: -1vw;
+          text-align: center;
+          width: 100%;
+          border-bottom: 0.4vw solid rgba(0, 0, 0, 0.836);
+        }
+        .content p {
+          font-size: 2.4vw;
+          text-align: justify;
+        }
+        .page1 {
+          width: 100%;
+          max-height: fit-content;
+          background-color: rgba(219, 219, 219, 0.479);
+          padding: 70px 0px 0 0px;
+        }
+        .mainnav {
+          position: fixed;
+          top: 0;
+          z-index: 1000;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+          height: 70px;
+        }
+        .maindropdownmenu {
+          display: none;
+        }
+        .nav {
+          height: 100%;
+        }
+      }
+      @media (max-width: 400px) {
+        .overlay1 h1 {
+          padding: 5vw;
+          height: 20vw;
+          font-size: 8vw;
+        }
+        .content p {
+          font-size: 2.4vw;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="sidebar">
+        <div class="closeicon">
+          <i class="ri-close-line"></i>
+        </div>
+        <div class="sidebarlinks1">
+          <a href="./index.html"><i class="ri-home-2-line"></i> Home </a>
+          <a href=""><i class="ri-gallery-view-2"></i>Gallery</a>
+          <a href=""><i class="ri-phone-fill"></i>Contact</a>
+        </div>
+        <div class="sidebardropdown">
+          <div class="sideabout">
+            <div class="sideaboutdiv">
+              <a href="#">Kumaun</a>
+              <i class="ri-arrow-down-s-fill"></i>
+            </div>
+            <div class="sideaboutdropdown">
+              <a href="./himalayas.html">Himalayas</a>
+              <a href="#">History</a>
+              <a href="./topography.html">Topography</a>
+              <a href="#">Flora & Fauna</a>
+              <a href="./culture.html">Culture & Heritage</a>
+              <a href="./fest_fairs.html">Fairs & Fests</a>
+            </div>
+          </div>
+          <div class="sideabout">
+            <div class="sideaboutdiv">
+              <a href="">About</a>
+              <i class="ri-arrow-down-s-fill"></i>
+            </div>
+            <div class="sideaboutdropdown">
+              <a href="#">Mission</a>
+              <a href="#">Message</a>
+              <a href="./ourteam.html">Our Team</a>
+            </div>
+          </div>
+          <div class="sideabout">
+            <div class="sideaboutdiv">
+              <a href="./destination.html">Destinations</a>
+              <i class="ri-arrow-down-s-fill"></i>
+            </div>
+            <div class="sideaboutdropdown">
+              <a href="./popular destination.html">Popular</a>
+              <a href="#">Nature</a>
+              <a href="./adventure.html">Adventure</a>
+              <a href="./culture.html">Culture & Heritage</a>
+              <a href="./spiritual.html">Spiritual</a>
+              <a href="#">Seasonal</a>
+              <a href="#">Unexplored</a>
+            </div>
+          </div>
+          <div class="sideabout">
+            <div class="sideaboutdiv">
+              <a href="./fest_fairs.html">Events</a>
+            </div>
+          </div>
+          <div class="sideabout">
+            <div class="sideaboutdiv">
+              <a href="./testimonials.html">Testimonials</a>
+            </div>
+          </div>
+          <div class="sideabout">
+            <div class="sideaboutdiv">
+              <a href="#">Bookings</a>
+            </div>
+          </div>
+          <div class="sideabout">
+            <div class="sideaboutdiv">
+              <a href="#">Archives</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mousecursor"></div>
+      <nav>
+        <div class="mainnav">
+          <div class="nav">
+            <div class="logo">
+              <a href="./index.html"
+                ><img src="./image/full-logo-final.png" alt=""
+              /></a>
+            </div>
+            <div class="middle">
+              <a href="./index.html">Home</a>
+              <a href="">Gallery</a>
+              <a href="">Contact</a>
+              <a id="menuicon" href="#"><i class="ri-menu-3-line"></i></a>
+            </div>
+          </div>
+          <div class="maindropdownmenu">
+            <div class="dropdownmenu">
+              <a href="#">Kumaoun <i class="ri-arrow-down-s-line"></i></a>
+              <div class="dropdown-content">
+                <a href="./himalayas.html">Himalayas</a>
+                <a href="#">History</a>
+                <a href="./topography.html">Topography</a>
+                <a href="#">Flora & Fauna</a>
+                <a href="./culture.html">Culture & Heritage</a>
+                <a href="./fest_fairs.html">Fairs & Fests</a>
+              </div>
+            </div>
+            <div class="dropdownmenu">
+              <a href="#">About US <i class="ri-arrow-down-s-line"></i></a>
+              <div class="dropdown-content">
+                <a href="#">Mission</a>
+                <a href="#">Massege</a>
+                <a href="./ourteam.html">Our Team</a>
+              </div>
+            </div>
+            <div class="dropdownmenu">
+              <a href="./destination.html"
+                >Destinations <i class="ri-arrow-down-s-line"></i
+              ></a>
+              <div class="dropdown-content">
+                <a href="./popular destination.html">Popular</a>
+                <a href="#">Nature</a>
+                <a href="./adventure.html">Adventure</a>
+                <a href="./culture.html">Culture & Heritage</a>
+                <a href="./spiritual.html">Spiritual</a>
+                <a href="#">Seasonal</a>
+                <a href="#">Unexplored</a>
+              </div>
+            </div>
+            <div class="dropdownmenu">
+              <a href="./fest_fairs.html">Events</a>
+            </div>
+            <div class="dropdownmenu">
+              <a href="./testimonials.html">Testimonials</a>
+            </div>
+            <div class="dropdownmenu">
+              <a href="">Bookings</a>
+            </div>
+            <div class="dropdownmenu">
+              <a href="">Archives</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class="page1">
+        <div class="imagecontainer">
+          <img
+            src="https://blossomblissresort.com/blog/wp-content/uploads/2024/05/top.jpg"
+            alt=""
+          />
+          <div class="overlay1">
+            <h1>Kumauni Cuisine</h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="page2">
+        <div class="infocontainer">
+          <div class="about">
+            <div class="aboutimg">
+              <img
+                src="https://media-cdn.tripadvisor.com/media/photo-s/0e/73/c5/e7/cafe-chaandi-maati.jpg"
+                alt=""
+              />
+            </div>
+            <div class="content">
+              <h2>Food</h2>
+              <p>
+                The Kumaon region of Uttarakhand is known for its rich and
+                diverse culinary traditions that reflect the culture and natural
+                bounty of the area. The cuisine of Kumaon is simple, hearty, and
+                full of flavors that are unique to the region. It makes use of
+                locally available ingredients such as pulses, grains,
+                vegetables, and herbs, which gives the food its distinct taste
+                and nutritional value.
+                <br />
+                One of the most popular dishes in Kumaon is bhatt ki churdkani,
+                a curry made with black soybeans (bhatt) and a blend of local
+                spices. It is served with rice and is a staple in many
+                households. Another common dish is aloo ke gutke, which is a
+                spicy potato dish seasoned with red chili, turmeric, and
+                coriander. It's often paired with puri or paratha.
+                <br />
+                Kumaoni raita is a yogurt-based dish with cucumber, spices, and
+                sometimes added mustard oil for a tangy flavor. Kafuli is
+                another popular dish made from green leafy vegetables such as
+                spinach and fenugreek, cooked in a thick sauce of wheat flour
+                and yogurt.
+                <br />
+                Bal mithai and singori are traditional sweets that are
+                well-loved in Kumaon. Bal mithai is made from condensed milk and
+                sugar, coated with sugar balls, while singori is a conical sweet
+                made from khoya and coconut wrapped in a leaf.
+                <br />
+                The food in Kumaon not only offers a unique gastronomic
+                experience but also speaks to the region's traditions and way of
+                life. The recipes have been passed down through generations, and
+                the emphasis on natural and local ingredients ensures that the
+                food is both healthy and flavorful.
+                <br />
+                The Kumaon region of Uttarakhand is known for its rich
+                biodiversity and lush landscapes, which support the growth of
+                various unique and flavorful fruits. Some of the special fruits
+                of Kumaon include:  Kafal: Kafal (Myrica esculenta) is a small,
+                red fruit native to the hills of Kumaon. It has a tangy and
+                slightly sweet taste, and is a favorite among the local people.
+                Kafal is often eaten fresh or used to make jams and chutneys.
+                <br />
+                Hisalu: Hisalu (Rubus ellipticus) is a yellow-colored berry that
+                resembles raspberries in appearance. It has a sweet and tangy
+                flavor and is enjoyed fresh or used in desserts and beverages.
+                <br />
+                Amlok: Amlok, also known as Indian Crab Apple, is a small, tart
+                fruit that is often used to make chutneys, jams, and juices. It
+                is known for its distinct flavor and is a popular ingredient in
+                local recipes.  Gahat (Kulath): Gahat is a pulse that is often
+                mistaken for a fruit due to its wide use in the region. It is a
+                traditional ingredient in Kumaoni cuisine, used to prepare
+                various dishes like dal and soups.  Mehal: Mehal is a local
+                fruit found in the Kumaon region, known for its sweet and juicy
+                flavor. It is usually consumed fresh.  Maltas: Maltas, also
+                known as Indian wild oranges, are a citrus fruit found in the
+                region. They are used to make fresh juice and are known for
+                their refreshing and tangy taste.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+      integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+      integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="./sidebar/sidebar.js"></script>
+    <script>
+      var main = document.querySelector(".main");
+      var cursor = document.querySelector(".mousecursor");
+      var imageDivs = document.querySelectorAll(".aboutimgcont");
+
+      var stopRunDropdown = function () {
+        if (window.innerWidth >= 770) {
+          gsap.to(".mainnav", {
+            backgroundColor: "white",
+            color: "black",
+            duration: 0.5,
+            height: "110px",
+            scrollTrigger: {
+              trigger: ".nav",
+              scroller: "body",
+              start: "top -10%",
+              end: "top -9%",
+              scrub: 1,
+            },
+          });
+        } else {
+          gsap.to(".mainnav", {
+            backgroundColor: "white",
+            color: "black",
+            duration: 0.5,
+            height: "80px",
+            scrollTrigger: {
+              trigger: ".nav",
+              scroller: "body",
+              start: "top -10%",
+              end: "top -9%",
+              scrub: 1,
+            },
+          });
+        }
+      };
+
+      // Call the function initially
+      stopRunDropdown();
+
+      // Add event listener for window resize
+      window.addEventListener("resize", stopRunDropdown);
+      gsap.to(".middle a", {
+        color: "black",
+        duration: 0.5,
+        scrollTrigger: {
+          trigger: ".nav",
+          scroller: "body",
+          start: "top -10%",
+          end: "top -9%",
+          scrub: 1,
+        },
+      });
+      gsap.to(".maindropdownmenu", {
+        backgroundColor: "rgba(79, 174, 128, 0.513)",
+        color: "white",
+        duration: 0.5,
+        scrollTrigger: {
+          trigger: ".maindropdownmenu",
+          scroller: "body",
+          start: "top -5%",
+          end: "top -9%",
+          scrub: 1,
+        },
+      });
+
+      main.addEventListener("mousemove", function (dets) {
+        gsap.to(cursor, {
+          x: dets.x,
+          y: dets.y,
+          ease: "power2.",
+          duration: 0.5,
+        });
+      });
+
+      imageDivs.forEach(function (imageDiv) {
+        imageDiv.addEventListener("mouseenter", function () {
+          cursor.innerHTML = "View More";
+          gsap.to(cursor, {
+            scale: 4,
+            backgroundColor: "#ffffffA5",
+            color: "#333",
+            ease: "power1.out",
+            duration: 0.5,
+          });
+          gsap.to(imageDiv.querySelector("img"), {
+            scale: 1.2,
+            ease: "power1.out",
+            duration: 0.5,
+          });
+        });
+
+        imageDiv.addEventListener("mouseleave", function () {
+          cursor.innerHTML = "";
+          gsap.to(cursor, {
+            scale: 1,
+            backgroundColor: "rgba(0, 0, 0, 0.677)",
+            ease: "power2.out",
+            duration: 0.3,
+          });
+          gsap.to(imageDiv.querySelector("img"), {
+            scale: 1,
+            ease: "power2.out",
+            duration: 0.5,
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
